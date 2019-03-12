@@ -1,0 +1,24 @@
+{
+   "background": {
+      "page": "views/background.html"
+   },
+   "content_scripts": [ {
+      "js": [ "js/jquery.js", "js/content.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "description": "Put your custom images everywhere! Replaces all images on all pages to image of your choice.",
+   "icons": {
+      "128": "icons/128x128.png",
+      "16": "icons/16x16.png",
+      "48": "icons/48x48.png"
+   },
+   "manifest_version": 2,
+   "name": "Custom Picture Replacement",
+   "options_page": "views/options.html",
+   "permissions": [ "tabs", "contextMenus", "http://*/*", "https://*/*" ],
+   "short_name": "Custom Image",
+   "update_url": "https://clients2.google.com/service/update2/crt",
+   "version": "1.1.1",
+   "web_accessible_resources": [ "data/*" ]
+}
