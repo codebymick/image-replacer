@@ -88,3 +88,6 @@ chrome
 
 **/**/jquery.js
 jquery
+
+**/**/bootstrap-theme.min.css
+**/**/bootstrap.min.css
