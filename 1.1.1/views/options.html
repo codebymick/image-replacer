@@ -15,8 +15,19 @@
     <h3 class="title">Custom Picture Replacement</h3>
 
     <div class="btn-group change-status" role="group" id="change_status">
-        <button type="button" class="btn btn-default" data-power="true">On</button>
-        <button type="button" class="btn btn-default" data-power="false">Off</button>
+        <button type="button" class="btn btn-default btn-success" data-power="true">on</button>
+        <button type="button" class="btn btn-default" data-power="false">off</button>
+    </div>
+
+    <div class="dropdown">
+        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown trigger
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dLabel">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
     </div>
 
     <div class="alert alert-info check-status" id="check_status" role="alert"></div>

@@ -5,11 +5,13 @@
  */
 
 $(document).ready(function () {
-
+    $('.dropdown').click(function(){
+        $('.dropdown-menu').addClass('active');
+    });
     chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
         if (msg.action == 'pr_change_power') {
-            $('#change_status .btn').removeClass('btn-primary')
-            $('#change_status [data-power=' + msg.power + ']').addClass('btn-primary');
+            $('#change_status .btn').removeClass('btn-success')
+            $('#change_status [data-power=' + msg.power + ']').addClass('btn-success');
         }
         if (msg.action == 'pr_check_data') {
             var $check_status = $('#check_status');
@@ -29,8 +31,8 @@ $(document).ready(function () {
     });
 
     chrome.runtime.sendMessage({action: "pr_get_power"}, function (power) {
-        $('#change_status .btn').removeClass('btn-primary');
-        $('#change_status [data-power=' + power + ']').addClass('btn-primary');
+        $('#change_status .btn').removeClass('btn-success');
+        $('#change_status [data-power=' + power + ']').addClass('btn-success');
     });
 
     chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
