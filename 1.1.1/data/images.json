@@ -1,6 +1,6 @@
 [
-    category:
-        {"https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
+    {category:
+        ["https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
     "https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
     "https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
     "https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
@@ -12,6 +12,7 @@
     "https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
     "https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
     "https://freddymutnosh.com/chrome/imagebank/logoNEG.png",
-    "https://freddymutnosh.com/chrome/imagebank/logoNEG.png"},
+    "https://freddymutnosh.com/chrome/imagebank/logoNEG.png"]
+    },
 
 ]
