@@ -76,7 +76,6 @@ var pr = {
                     cb && cb()
                 }
             }
-
             load();
         },
         init: function () {
