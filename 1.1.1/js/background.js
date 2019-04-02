@@ -86,7 +86,7 @@ var pr = {
                 pr.data.get(function (data) {
                     pr.data.check(data, function () {
                         pr.debug && console.log('data.init save data');
-                        pr.setting.set('data', JSON.stringify(pr.data.check_data));
+                        pr.setting.set('data.category', JSON.stringify(pr.data.check_data));
                         pr.setting.set('time_check', new Date());
                     })
                 })

@@ -15,7 +15,8 @@ $(document).ready(function () {
         imageFolder !== null ? getFiles(imageFolder) : console.log('please choose a category');
     });
 
-})
+});
+
  function getFiles(imageFolder) {
      $('.dropdown').click(function(){
          $('.dropdown-menu').addClass('active');
@@ -47,8 +48,6 @@ $(document).ready(function () {
      });
 
      chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
-         console.log(data);
-
          if (data.length) {
              $('#random_image').slideDown().find('img').attr('src', data[Math.floor(Math.random() * data.length)]);
          } else {
