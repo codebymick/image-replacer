@@ -13,10 +13,6 @@
 
 <div class="container">
     <h3 class="title">Custom Picture Replacement</h3>
-    <div class="btn-group change-status" role="group" id="change_status">
-        <button type="button" class="btn btn-default btn-success" data-power="true">on</button>
-        <button type="button" class="btn btn-default" data-power="false">off</button>
-    </div>
 
     <div id="prompt" class="show">
         <p>Please select a category for your picture files</p>
@@ -24,7 +20,7 @@
     <div class="dropdown">
         <select id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown trigger
-            <option value="cats">default</option>
+            <option value="cats">...</option>
             <option value="dogs">dogs</option>
             <option value="people">cats</option>
             <option value="things">things</option>
@@ -35,6 +31,12 @@
 
     <div class="alert alert-info random-image" id="random_image">
         <img>
+        <img class="dummy" src="https://freddymutnosh.com/chrome/imagebank/logoNEG.png" alt="">
+    </div>
+
+    <div class="btn-group change-status pull-right" role="group" id="change_status">
+        <button type="button" class="btn btn-default btn-success" data-power="true">on</button>
+        <button type="button" class="btn btn-default" data-power="false">off</button>
     </div>
 </div>
 

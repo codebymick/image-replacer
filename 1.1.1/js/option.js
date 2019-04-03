@@ -30,11 +30,11 @@ function getFiles () {
                 $check_status.text('Start checking images (please wait while checking)');
             } else if (msg.status == 'finish') {
                 $check_status.text('Finish checking images').slideUp(1000);
-               $random_image.slideDown(1000)
+               $random_image.fadeIn(1000)
                    .find('img').attr('src', msg.check_data[Math.floor(Math.random() * msg.check_data.length)]);
             } else if (msg.status == 'load') {
                 $check_status.text('Checking images: ' + (msg.index + 1) + ' of ' + msg.data.length + ' (please wait while checking)');
-                $random_image.slideDown(1000).find('img').attr('src', msg.check_data[msg.check_data.length - 1]);
+                $random_image.fadeIn(1000).find('img').attr('src', msg.check_data[msg.check_data.length - 1]);
             }
         }
     });
