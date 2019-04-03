@@ -12,7 +12,7 @@ $(document).ready(function () {
         var $option = $(this).find('option:selected');
         var value = $option.val();
         imageFolder = value;
-        imageFolder !== null ? getFiles(imageFolder) : console.log('please choose a category');
+        imageFolder !== null ? getFiles(imageFolder) : alert('please choose a category');
     });
 
 });
