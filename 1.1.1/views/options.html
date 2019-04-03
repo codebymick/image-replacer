@@ -13,18 +13,20 @@
 
 <div class="container">
     <h3 class="title">Custom Picture Replacement</h3>
-
     <div class="btn-group change-status" role="group" id="change_status">
         <button type="button" class="btn btn-default btn-success" data-power="true">on</button>
         <button type="button" class="btn btn-default" data-power="false">off</button>
     </div>
 
+    <div id="prompt" class="show">
+        <p>Please select a category for your picture files</p>
+    </div>
     <div class="dropdown">
         <select id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown trigger
-            <option value="cats">cats</option>
+            <option value="cats">default</option>
             <option value="dogs">dogs</option>
-            <option value="people">people</option>
+            <option value="people">cats</option>
             <option value="things">things</option>
         </select>
     </div>

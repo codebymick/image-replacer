@@ -41,3 +41,11 @@
 .dropdown-menu.active a{
   display: block;
 }
+#prompt{
+  display: block;
+  margin: 2vh auto;
+  opacity: 0;
+}
+#prompt.show{
+  opacity: 1;
+}
