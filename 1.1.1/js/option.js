@@ -3,9 +3,8 @@
  * Date: 25.01.19
  */
  $(document).ready(function () {
-
      $('#dLabel').change(function() {
-         var $option = $(this).find('option:selected'),
+         var $option = $('#dLabel').find('option:selected'),
              selected = $option.attr('class'),
              initialText = $('.editable').val(),
              imageFolder = $option.val();
@@ -13,8 +12,6 @@
          $('.editOption').val(initialText);
          if(selected == "editable"){
              $('.editOption').show();
-
-
              $('.editOption').keyup(function(){
                  var editText = $('.editOption').val();
                  $('.editable').val(editText);
@@ -25,12 +22,43 @@
          }else{
              $('.editOption').hide();
          }
+     });
 
-         imageFolder !== null ? $('#prompt').removeClass('show') : '';
-         $('.button.submit').click(searchImages());
 
-         function searchImages(){
-             imageFolder !== null && imageFolder !== "example: https://yourdomain.com/images/" ? console.log(imageFolder) : ''
+
+     $('.submit').click(function() {
+         var $option = $('#dLabel').find('option:selected'),
+             selected = $option.attr('class'),
+             initialText = $('.editable').val(),
+             imageFolder = $option.val(),
+             unset = null || `example: https://example.com/images/`;
+
+         $('.editOption').val(initialText);
+         if(selected == "editable"){
+             $('.editOption').show();
+             $('.editOption').keyup(function(){
+                 var editText = $('.editOption').val();
+                 $('.editable').val(editText);
+                 $('.editable').html(editText);
+                 imageFolder = editText;
+             });
+
+         }else{
+             $('.editOption').hide();
+             $('.editable').html("not working'");
+         }
+
+         imageFolder !== unset ? $('#prompt').removeClass('show') : null;
+         $('.button.submit').click(searchImages(imageFolder));
+
+        // var isURL = function isURL(imageFolder) {
+        //     var urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
+        //     var url = new RegExp(urlRegex, 'i');
+        //     return str.length < 2083 && url.test(str);
+        // };
+
+         function searchImages(imageFolder){
+             imageFolder !== unset ? getFiles(imageFolder) : alert("you haven't selected a correct file location");
          }
      });
 
