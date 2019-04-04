@@ -1,17 +1,37 @@
  /**
- * Created by PhpStorm.
  * Author: m.white
  * Date: 25.01.19
  */
  $(document).ready(function () {
-     var imageFolder = null;
 
      $('#dLabel').change(function() {
          var $option = $(this).find('option:selected'),
-             value = $option.val();
-         imageFolder = value;
-         imageFolder !== null ? getFiles(imageFolder) : '';
+             selected = $option.attr('class'),
+             initialText = $('.editable').val(),
+             imageFolder = $option.val();
+
+         $('.editOption').val(initialText);
+         if(selected == "editable"){
+             $('.editOption').show();
+
+
+             $('.editOption').keyup(function(){
+                 var editText = $('.editOption').val();
+                 $('.editable').val(editText);
+                 $('.editable').html(editText);
+                 imageFolder = editText;
+             });
+
+         }else{
+             $('.editOption').hide();
+         }
+
          imageFolder !== null ? $('#prompt').removeClass('show') : '';
+         $('.button.submit').click(searchImages());
+
+         function searchImages(){
+             imageFolder !== null && imageFolder !== "example: https://yourdomain.com/images/" ? console.log(imageFolder) : ''
+         }
      });
 
  });

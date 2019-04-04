@@ -18,24 +18,24 @@
         <p>Please select a category for your picture files</p>
     </div>
     <div class="dropdown">
-        <select id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category
-            <option value="cats">...</option>
-            <option value="dogs">dogs</option>
-            <option value="people">cats</option>
-            <option value="things">things</option>
+        <select id="dLabel"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category
+            <option class="default" value="non">...</option>
+            <option class="default" value="logo">logo</option>
+            <option class="editable" value="example: https://yourdomain.com/images/">enter your root location here</option>
         </select>
+        <input class="editOption" style="display:none;"/>
+        <div class="btn button submit"></div>
     </div>
 
     <div class="alert alert-info check-status" id="check_status" role="alert"></div>
 
     <div class="alert alert-info random-image" id="random_image">
         <img>
-        <img class="dummy" src="https://freddymutnosh.com/chrome/imagebank/logoNEG.png" alt="">
     </div>
 
     <div class="btn-group change-status pull-right" role="group" id="change_status">
         <button type="button" class="btn btn-default btn-success" data-power="true">on</button>
-        <button type="button" class="btn btn-default" data-power="false">off</button>
+        <button type="button" class="btn btn-default off-btn" data-power="false">off</button>
     </div>
 </div>
 
