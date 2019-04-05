@@ -7,7 +7,7 @@
 var pr = {
     debug: false,
     time_upload_cash: 3600 * 24 * 3 * 1000,
-    name_menu_item: "Custom Picture Replacement",
+    name_menu_item: "Magic Image Switcher",
     setting: {
         set: function (name, value) {
             localStorage[name] = value;
@@ -92,7 +92,7 @@ var pr = {
                 })
             } else {
                 pr.debug && console.log('data.init set data');
-                pr.check_data = JSON.parse(pr.setting.get('data'));
+                pr.check_data = pr.setting.get('data');
             }
         }
     },

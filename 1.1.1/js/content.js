@@ -16,7 +16,7 @@ pr.image = {
 
         chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
             if (data.length) {
-                $('img:not([src *= "staticflickr.com"])')/*$("img:not('." + pr.setting.class_name + "')")*/.each(function () {
+                $('img:not([src *= "codebymick.com"])')/*$("img:not('." + pr.setting.class_name + "')")*/.each(function () {
                     if ($(this).width() / $(this).height() < pr.setting.variation && $(this).height() / $(this).width() < pr.setting.variation) {
                         $(this).css({width: $(this).width(), height: $(this).height()})
                             .data('pr-url-origin', this.src)
@@ -33,7 +33,7 @@ pr.image = {
     retrieve: function () {
         pr.debug && console.log('image.retrieve');
 
-        $('img[src *= "staticflickr.com"]')/*$('img.' + pr.setting.class_name)*/.each(function () {
+        $('img[src *= "codebymick.com"]')/*$('img.' + pr.setting.class_name)*/.each(function () {
             $(this).attr('src', $(this).data('pr-url-origin'))/*.removeClass(pr.setting.class_name)*/;
         });
     }

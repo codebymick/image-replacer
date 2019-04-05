@@ -14,7 +14,7 @@
       "48": "icons/48x48.png"
    },
    "manifest_version": 2,
-   "name": "Custom Picture Replacement",
+   "name": "Magic Image Switcher",
    "options_page": "views/options.html",
    "permissions": [ "tabs", "contextMenus", "http://*/*", "https://*/*" ],
    "short_name": "Custom Image",
