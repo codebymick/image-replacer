@@ -4,7 +4,7 @@
  * Date: 25.01.19
  */
 
-var pr = {};
+let pr = {};
 pr.debug = false;
 pr.setting = {
     class_name: 'pr-image-replace',

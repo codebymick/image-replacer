@@ -4,7 +4,7 @@
  */
 $(document).ready(function () {
   $('#dLabel').change(function () {
-    var $option     = $('#dLabel').find('option:selected'),
+    let $option     = $('#dLabel').find('option:selected'),
         selected    = $option.attr('class'),
         initialText = $('.editable').val(),
         imageFolder = $option.val();
@@ -13,7 +13,7 @@ $(document).ready(function () {
     if (selected == "editable") {
       $('.editOption').show();
       $('.editOption').keyup(function () {
-        var editText = $('.editOption').val();
+        let editText = $('.editOption').val();
         $('.editable').val(editText);
         $('.editable').html(editText);
         imageFolder = editText;
@@ -35,7 +35,7 @@ $(document).ready(function () {
     if (selected == "editable") {
       $('.editOption').show();
       $('.editOption').keyup(function () {
-        var editText = $('.editOption').val();
+        let editText = $('.editOption').val();
         $('.editable').val(editText);
         $('.editable').html(editText);
         imageFolder = editText;
@@ -46,7 +46,7 @@ $(document).ready(function () {
     }
 
     imageFolder !== unset ? $('#prompt').removeClass('show') : null;
-    console.log(imageFolder);
+    // console.log(imageFolder);
     $('.button.submit').click(searchImages(imageFolder));
 
     function searchImages(imageFolder) {
@@ -62,8 +62,8 @@ function getFiles() {
       $('#change_status [data-power=' + msg.power + ']').addClass('btn-success');
     }
     if (msg.action == 'pr_check_data') {
-      var $check_status = $('#check_status');
-      var $random_image = $('#random_image');
+      let $check_status = $('#check_status'),
+          $random_image = $('#random_image');
       $check_status.slideDown();
       if (msg.status == 'start') {
         $check_status.text('Start checking images (please wait while checking)');
@@ -85,7 +85,7 @@ function getFiles() {
 
   chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
     if (data.length) {
-      console.log(data);
+      // console.log(data);
       $('#random_image').slideDown().find('img').attr('src', data[Math.floor(Math.random() * data.length)]);
     } else {
       $('#check_status').slideDown().text('Start checking images (please wait while checking)');
