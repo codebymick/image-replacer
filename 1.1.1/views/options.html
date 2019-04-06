@@ -15,20 +15,27 @@
         <p>Please select a URL for your picture files</p>
     </div>
     <div class="dropdown">
-        <select id="dLabel"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category
+        <select class="dLabel" id="dLabel1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option class="default" value="logo">codebymick</option>
-            <option class="editable" value="example: https://example.com/images/">enter custom root location here</option>
+            <option class="editable" value="example: https://example.com/images/">enter custom location here</option>
+        </select>
+        <input class="editOption" style="display:none;"/>
+    </div>
+    <div class="dropdown">
+        <select class="dLabel" id="dLabel2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <option class="default" value="logo">codebymick</option>
+            <option class="editable" value="example: https://example.com/images/">enter custom location here</option>
+        </select>
+        <input class="editOption" style="display:none;"/>
+    </div>
+    <div class="dropdown">
+        <select class="dLabel" id="dLabel3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <option class="default" value="logo">codebymick</option>
+            <option class="editable" value="example: https://example.com/images/">enter custom location here</option>
         </select>
         <input class="editOption" style="display:none;"/>
         <div class="btn button submit"></div>
     </div>
-    <form>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <button type="submit" class="BIG btn btn-primary">Submit</button>
-    </form>
 
     <div class="alert alert-info check-status" id="check_status" role="alert"></div>
 

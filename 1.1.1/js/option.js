@@ -3,42 +3,47 @@
  * Date: 25.01.19
  */
 $(document).ready(function () {
-
-  $('#dLabel').change(function () {
-    let $option     = $('#dLabel').find('option:selected'),
+for (var i = 1; i < 4; i++) {
+  $('#dLabel-' + i).change(function () {
+    let $option     = $(this).find('option:selected'),
         selected    = $option.attr('class'),
-        initialText = $('.editable').val(),
+        initialText = $(this).find('.editable').val(),
         imageFolder = $option.val();
 
-    $('.editOption').val(initialText);
+    // $(this).find('.editOption').val(initialText);
+
     if (selected == "editable") {
-      $('.editOption').show();
-      $('.editOption').keyup(function () {
-        let editText = $('.editOption').val();
-        $('.editable').val(editText);
-        $('.editable').html(editText);
+      $(this).find('.editOption').show();
+      $(this).find('.editOption').keyup(function () {
+        let editText = $(this).find('.editOption').val();
+        // $(this).find('.editable').val(editText);
+        // $(this).find('.editable').html(editText);
         imageFolder = editText;
       });
 
     } else {
-      $('.editOption').hide();
+      $(this).find('.editOption').hide();
     }
   });
+}
+
+
+
 
   $('.submit').click(function () {
-    let $option     = $('#dLabel').find('option:selected'),
+    let $option     = $('.dLabel').find('option:selected'),
         selected    = $option.attr('class'),
         initialText = $('.editable').val(),
         imageFolder = $option.val(),
-        unset       = null || `example: https://example.com/images/`;
+        unset       = null;
 
-    $('.editOption').val(initialText);
+    // $('.editOption').val(initialText);
     if (selected == "editable") {
       $('.editOption').show();
       $('.editOption').keyup(function () {
         let editText = $('.editOption').val();
-        $('.editable').val(editText);
-        $('.editable').html(editText);
+        // $('.editable').val(editText);
+        // $('.editable').html(editText);
         imageFolder = editText;
       });
 
@@ -46,7 +51,7 @@ $(document).ready(function () {
       $('.editOption').hide();
     }
 
-    imageFolder !== unset ? $('#prompt').removeClass('show') : null;
+    imageFolder !== unset ? $('#prompt').removeClass('show') : $('.editable').val(editText);
     // console.log(imageFolder);
     $('.button.submit').click(searchImages(imageFolder));
 
@@ -56,16 +61,13 @@ $(document).ready(function () {
   });
 });
 function saveChanges(imageFolder) {
-  // Get a value saved in a form.
-  let value = imageFolder;
-  // Check that there's some code there.
-  if (!value) {
+
+  if (!imageFolder) {
     alert('Error: No value specified');
     return;
   }
-  // Save it using the Chrome extension storage API.
-  chrome.storage.sync.set({key: value}, function() {
-    console.log('Value is set to ' + value);
+  chrome.storage.sync.set({key: imageFolder}, function() {
+    console.log('Value is set to ' + imageFolder);
   });
 
   chrome.storage.sync.get(['key'], function(result) {
