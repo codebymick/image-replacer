@@ -3,6 +3,7 @@
  * Date: 25.01.19
  */
 $(document).ready(function () {
+
   $('#dLabel').change(function () {
     let $option     = $('#dLabel').find('option:selected'),
         selected    = $option.attr('class'),
@@ -50,11 +51,27 @@ $(document).ready(function () {
     $('.button.submit').click(searchImages(imageFolder));
 
     function searchImages(imageFolder) {
-      imageFolder !== unset ? getFiles() : alert("you haven't selected a correct file location");
+      imageFolder !== unset ? saveChanges(imageFolder) : alert("you haven't selected a correct file location");
     }
   });
 });
+function saveChanges(imageFolder) {
+  // Get a value saved in a form.
+  let value = imageFolder;
+  // Check that there's some code there.
+  if (!value) {
+    alert('Error: No value specified');
+    return;
+  }
+  // Save it using the Chrome extension storage API.
+  chrome.storage.sync.set({key: value}, function() {
+    console.log('Value is set to ' + value);
+  });
 
+  chrome.storage.sync.get(['key'], function(result) {
+    console.log('Value currently is ' + result.key);
+  });
+}
 function getFiles() {
   chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
     if (msg.action == 'pr_change_power') {

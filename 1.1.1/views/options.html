@@ -5,9 +5,6 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../css/options.css">
-    <style>
-
-    </style>
 </head>
 <body>
 
@@ -15,7 +12,7 @@
     <h3 class="title">Magic Image Switcher</h3>
 
     <div id="prompt" class="show">
-        <p>Please select a category for your picture files</p>
+        <p>Please select a URL for your picture files</p>
     </div>
     <div class="dropdown">
         <select id="dLabel"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category
@@ -25,6 +22,13 @@
         <input class="editOption" style="display:none;"/>
         <div class="btn button submit"></div>
     </div>
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <button type="submit" class="BIG btn btn-primary">Submit</button>
+    </form>
 
     <div class="alert alert-info check-status" id="check_status" role="alert"></div>
 

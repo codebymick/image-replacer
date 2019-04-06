@@ -216,3 +216,4 @@ chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
 });
 
 pr.init();
+
