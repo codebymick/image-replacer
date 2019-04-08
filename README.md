@@ -1,4 +1,5 @@
 # image-replacer
 fun chrome extension to replace all in browser images
 
-WIP - dev project in ajax calls and sql management
+build exercise specifically for javascript.
+practice in getting around chrome.storage

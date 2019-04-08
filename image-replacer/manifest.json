@@ -14,7 +14,7 @@
    "manifest_version": 2,
    "name": "Magic Image Swap",
    "author": "codebymick",
-   "options_page": "views/options.html",
+   "options_page": "options.html",
    "permissions": [ "storage" ],
    "short_name": "Image Replacer",
    "update_url": "https://clients2.google.com/service/update2/crx",
