@@ -14,28 +14,15 @@
     <div id="prompt" class="show">
         <p>Please select a URL for your picture files</p>
     </div>
-    <div class="dropdown">
-        <select class="dLabel" id="dLabel1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option class="default" value="logo">codebymick</option>
-            <option class="editable" value="example: https://example.com/images/">enter custom location here</option>
-        </select>
-        <input class="editOption" style="display:none;"/>
-    </div>
-    <div class="dropdown">
-        <select class="dLabel" id="dLabel2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <option class="default" value="logo">codebymick</option>
-            <option class="editable" value="example: https://example.com/images/">enter custom location here</option>
-        </select>
-        <input class="editOption" style="display:none;"/>
-    </div>
-    <div class="dropdown">
-        <select class="dLabel" id="dLabel3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <option class="default" value="logo">codebymick</option>
-            <option class="editable" value="example: https://example.com/images/">enter custom location here</option>
-        </select>
-        <input class="editOption" style="display:none;"/>
-        <div class="btn button submit"></div>
-    </div>
+    <form action="" id="url-content">
+        <div class="image-wrapper">
+            <img class="img-0" src="https://www.codebymick.com/chrome/imagebank/logoRED.png">
+            <input id="img-0" class="url-item" value="https://www.codebymick.com/chrome/imagebank/logoNEG.png"/>
+        </div>
+    </form>
+    <button class="btn btn-default  add">add row</button>
+    <button class="btn btn-default  submit">submit</button>
+    <div id="element"></div>
 
     <div class="alert alert-info check-status" id="check_status" role="alert"></div>
 

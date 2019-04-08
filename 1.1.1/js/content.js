@@ -4,7 +4,8 @@
  * Date: 25.01.19
  */
 
-let pr = {};
+let pr = chrome.storage.sync.get(['key'], function (result) {
+ });
 pr.debug = false;
 pr.setting = {
     class_name: 'pr-image-replace',
@@ -14,7 +15,8 @@ pr.image = {
     change: function () {
         pr.debug && console.log('image.change');
 
-        chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
+            chrome.storage.sync.get(['key'], function (data) {
+
             if (data.length) {
                 $('img:not([src *= "codebymick.com"])')/*$("img:not('." + pr.setting.class_name + "')")*/.each(function () {
                     if ($(this).width() / $(this).height() < pr.setting.variation && $(this).height() / $(this).width() < pr.setting.variation) {

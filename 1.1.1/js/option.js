@@ -2,116 +2,81 @@
  * Author: m.white
  * Date: 25.01.19
  */
-$(document).ready(function () {
-for (var i = 1; i < 4; i++) {
-  $('#dLabel-' + i).change(function () {
-    let $option     = $(this).find('option:selected'),
-        selected    = $option.attr('class'),
-        initialText = $(this).find('.editable').val(),
-        imageFolder = $option.val();
-
-    // $(this).find('.editOption').val(initialText);
-
-    if (selected == "editable") {
-      $(this).find('.editOption').show();
-      $(this).find('.editOption').keyup(function () {
-        let editText = $(this).find('.editOption').val();
-        // $(this).find('.editable').val(editText);
-        // $(this).find('.editable').html(editText);
-        imageFolder = editText;
-      });
-
-    } else {
-      $(this).find('.editOption').hide();
-    }
-  });
-}
-
-
-
-
-  $('.submit').click(function () {
-    let $option     = $('.dLabel').find('option:selected'),
-        selected    = $option.attr('class'),
-        initialText = $('.editable').val(),
-        imageFolder = $option.val(),
-        unset       = null;
-
-    // $('.editOption').val(initialText);
-    if (selected == "editable") {
-      $('.editOption').show();
-      $('.editOption').keyup(function () {
-        let editText = $('.editOption').val();
-        // $('.editable').val(editText);
-        // $('.editable').html(editText);
-        imageFolder = editText;
-      });
-
-    } else {
-      $('.editOption').hide();
-    }
-
-    imageFolder !== unset ? $('#prompt').removeClass('show') : $('.editable').val(editText);
-    // console.log(imageFolder);
-    $('.button.submit').click(searchImages(imageFolder));
-
-    function searchImages(imageFolder) {
-      imageFolder !== unset ? saveChanges(imageFolder) : alert("you haven't selected a correct file location");
-    }
-  });
+$(document).on('keyup', '.url-item', function () {
+    let source = $(this).val(), thisClass = $(this).attr("id");
+    $('.' + thisClass).attr("src", source)
 });
-function saveChanges(imageFolder) {
 
-  if (!imageFolder) {
-    alert('Error: No value specified');
-    return;
-  }
-  chrome.storage.sync.set({key: imageFolder}, function() {
-    console.log('Value is set to ' + imageFolder);
-  });
+$(document).ready(function () {
+    $.fn.valuesArr = function () {
+        var a = [];
+        $.each(this, function (i, field) {
+            a.push(field.value);
+        });
+        return a;
+    }
 
-  chrome.storage.sync.get(['key'], function(result) {
-    console.log('Value currently is ' + result.key);
-  });
+    $('.submit').click(function () {
+        var urlArr = $('.url-item').valuesArr();
+        setFiles(urlArr);
+    });
+    let countBox = 1, boxName = "https://codebymick.com/chrome/imagebank/logo.png";
+    $('.add').click(function () {
+        $('#url-content')
+            .append('<div class="image-wrapper"><img class="img-' + countBox + '" src="' + boxName + '"/>' +
+                '<input class="url-item" id="img-' + countBox + '" value="' + boxName + '" "  /></div>');
+        countBox++;
+    });
+
+
+});
+
+function setFiles(value) {
+    if (!value) {
+        alert('Error: No value specified');
+        return;
+    }
+    chrome.storage.sync.set({value});
+    getFiles(value);
 }
+
 function getFiles() {
-  chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
-    if (msg.action == 'pr_change_power') {
-      $('#change_status .btn').removeClass('btn-success');
-      $('#change_status [data-power=' + msg.power + ']').addClass('btn-success');
-    }
-    if (msg.action == 'pr_check_data') {
-      let $check_status = $('#check_status'),
-          $random_image = $('#random_image');
-      $check_status.slideDown();
-      if (msg.status == 'start') {
-        $check_status.text('Start checking images (please wait while checking)');
-      } else if (msg.status == 'finish') {
-        $check_status.text('Finish checking images').slideUp(1000);
-        $random_image.fadeIn(1000)
-        .find('img').attr('src', msg.check_data[Math.floor(Math.random() * msg.check_data.length)]);
-      } else if (msg.status == 'load') {
-        $check_status.text('Checking images: ' + (msg.index + 1) + ' of ' + msg.data.code.length + ' (please wait while checking)');
-        $random_image.fadeIn(1000).find('img').attr('src', msg.check_data[msg.check_data.length - 1]);
-      }
-    }
-  });
+    chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
+        if (msg.action == 'pr_change_power') {
+            $('#change_status .btn').removeClass('btn-success');
+            $('#change_status [data-power=' + msg.power + ']').addClass('btn-success');
+        }
+        if (msg.action == 'pr_check_data') {
+            let $check_status = $('#check_status'),
+                $random_image = $('#random_image');
+            $check_status.slideDown();
+            if (msg.status == 'start') {
+                $check_status.text('Start checking images (please wait while checking)');
+            } else if (msg.status == 'finish') {
+                $check_status.text('Finish checking images').slideUp(1000);
+                $random_image.fadeIn(1000)
+                    .find('img').attr('src', msg.check_data[Math.floor(Math.random() * msg.check_data.length)]);
+            } else if (msg.status == 'load') {
+                $check_status.text('Checking images: ' + (msg.index + 1) + ' of ' + msg.data.code.length + ' (please wait while checking)');
+                $random_image.fadeIn(1000).find('img').attr('src', msg.check_data[msg.check_data.length - 1]);
+            }
+        }
+    });
 
-  chrome.runtime.sendMessage({action: "pr_get_power"}, function (power) {
-    $('#change_status .btn').removeClass('btn-success');
-    $('#change_status [data-power=' + power + ']').addClass('btn-success');
-  });
+    chrome.runtime.sendMessage({action: "pr_get_power"}, function (power) {
+        $('#change_status .btn').removeClass('btn-success');
+        $('#change_status [data-power=' + power + ']').addClass('btn-success');
+    });
 
-  chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
-    if (data.length) {
-      // console.log(data);
-      $('#random_image').slideDown().find('img').attr('src', data[Math.floor(Math.random() * data.length)]);
-    } else {
-      $('#check_status').slideDown().text('Start checking images (please wait while checking)');
-    }
-  });
+    chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
+        if (data.length) {
+            $('#random_image').slideDown().find('img').attr('src', data[Math.floor(Math.random() * data.length)]);
+        } else {
+            $('#check_status').slideDown().text('Start checking images (please wait while checking)');
+        }
+    });
 
-  $('#change_status .btn').on('click', function () {
-    chrome.runtime.sendMessage({action: "pr_set_power", power: $(this).data('power')});
-  })
+    $('#change_status .btn').on('click', function () {
+        chrome.runtime.sendMessage({action: "pr_set_power", power: $(this).data('power')});
+    })
 }
