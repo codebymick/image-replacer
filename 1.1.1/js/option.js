@@ -2,7 +2,6 @@
  * Author: m.white
  * Date: 25.01.19
  */
-let url;
 
 $(document).on('keyup', '.url-item', function () {
 
@@ -31,7 +30,15 @@ $(document).on('click', '#zero', function (e) {
   $(this).closest('.input-wrapper').remove();
 });
 
+$(document).on('click', '#enabled', function () {
+  console.log(document.getElementById('enabled').checked);
+});
+
 $(document).ready(function () {
+  document.getElementById('enabled').checked = true;
+
+
+
   if ($('form').find('.input-wrapper').length === 1) {
     $('#zero').hide();
   }
@@ -67,7 +74,7 @@ $(document).ready(function () {
 
 });
 function save(urlArr) {
-  var imageBank = urlArr;
+  let imageBank = urlArr;
   chrome.storage.sync.set({key: imageBank});
   $('#submit').text('Saved');
   restore();
@@ -78,5 +85,4 @@ function restore() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", restore);
 
