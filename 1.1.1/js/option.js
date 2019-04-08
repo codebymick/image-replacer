@@ -2,81 +2,81 @@
  * Author: m.white
  * Date: 25.01.19
  */
+let url;
+
 $(document).on('keyup', '.url-item', function () {
-    let source = $(this).val(), thisClass = $(this).attr("id");
-    $('.' + thisClass).attr("src", source)
+
+  let source = $(this).val(), thisClass = $(this).attr("id"),
+      fallback                          = "https://codebymick.com/chrome/imagebank/logo.png",
+      thisError                         = $(this).siblings('.errorImage');
+  if (source) {
+    let image     = new Image();
+    image.onload  = function () {
+      $('.' + thisClass).attr("src", source).removeClass('invalid');
+      thisError.removeClass('show');
+      $('.saveError').removeClass('show');
+    };
+    image.onerror = function () {
+      $('.' + thisClass).attr("src", fallback).addClass('invalid');
+      thisError.addClass('show');
+    };
+    image.src     = source;
+  }
+  $('#submit').text('Save');
+
+});
+
+$(document).on('click', '#zero', function (e) {
+  e.preventDefault();
+  $(this).closest('.input-wrapper').remove();
 });
 
 $(document).ready(function () {
-    $.fn.valuesArr = function () {
-        var a = [];
-        $.each(this, function (i, field) {
-            a.push(field.value);
-        });
-        return a;
+  if ($('form').find('.input-wrapper').length === 1) {
+    $('#zero').hide();
+  }
+
+  $.fn.valuesArr = function () {
+    let a = [];
+    $.each(this, function (i, field) {
+      a.push(field.value);
+    });
+    return a;
+  };
+
+  $('#submit').click(function () {
+    if ($('.invalid').length == 0) {
+      let urlArr = $('.url-item').valuesArr();
+      save(urlArr);
+    } else {
+      $('.saveError').addClass('show');
     }
+  });
 
-    $('.submit').click(function () {
-        var urlArr = $('.url-item').valuesArr();
-        setFiles(urlArr);
-    });
-    let countBox = 1, boxName = "https://codebymick.com/chrome/imagebank/logo.png";
-    $('.add').click(function () {
-        $('#url-content')
-            .append('<div class="image-wrapper"><img class="img-' + countBox + '" src="' + boxName + '"/>' +
-                '<input class="url-item" id="img-' + countBox + '" value="' + boxName + '" "  /></div>');
-        countBox++;
-    });
-
+  let inputCount = 1, fallbackIMG = "https://codebymick.com/chrome/imagebank/logo.png";
+  $('.add').click(function () {
+    $('#url-content')
+    .append('<div class="input-wrapper"><div class="image-wrapper"><img class="img-' + inputCount + '" src="' + fallbackIMG + '"/>' +
+      '</div><div class="source-wrapper">' +
+      '<input class="url-item" id="img-' + inputCount + '" value="' + fallbackIMG + '" "  />' +
+      '<button id="zero">del</button>' +
+      '<div class="errorImage">the url you entered is not a valid image file.</div>' +
+      '</div></div>');
+    inputCount++;
+  });
 
 });
-
-function setFiles(value) {
-    if (!value) {
-        alert('Error: No value specified');
-        return;
-    }
-    chrome.storage.sync.set({value});
-    getFiles(value);
+function save(urlArr) {
+  var imageBank = urlArr;
+  chrome.storage.sync.set({key: imageBank});
+  $('#submit').text('Saved');
+  restore();
 }
 
-function getFiles() {
-    chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
-        if (msg.action == 'pr_change_power') {
-            $('#change_status .btn').removeClass('btn-success');
-            $('#change_status [data-power=' + msg.power + ']').addClass('btn-success');
-        }
-        if (msg.action == 'pr_check_data') {
-            let $check_status = $('#check_status'),
-                $random_image = $('#random_image');
-            $check_status.slideDown();
-            if (msg.status == 'start') {
-                $check_status.text('Start checking images (please wait while checking)');
-            } else if (msg.status == 'finish') {
-                $check_status.text('Finish checking images').slideUp(1000);
-                $random_image.fadeIn(1000)
-                    .find('img').attr('src', msg.check_data[Math.floor(Math.random() * msg.check_data.length)]);
-            } else if (msg.status == 'load') {
-                $check_status.text('Checking images: ' + (msg.index + 1) + ' of ' + msg.data.code.length + ' (please wait while checking)');
-                $random_image.fadeIn(1000).find('img').attr('src', msg.check_data[msg.check_data.length - 1]);
-            }
-        }
-    });
-
-    chrome.runtime.sendMessage({action: "pr_get_power"}, function (power) {
-        $('#change_status .btn').removeClass('btn-success');
-        $('#change_status [data-power=' + power + ']').addClass('btn-success');
-    });
-
-    chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
-        if (data.length) {
-            $('#random_image').slideDown().find('img').attr('src', data[Math.floor(Math.random() * data.length)]);
-        } else {
-            $('#check_status').slideDown().text('Start checking images (please wait while checking)');
-        }
-    });
-
-    $('#change_status .btn').on('click', function () {
-        chrome.runtime.sendMessage({action: "pr_set_power", power: $(this).data('power')});
-    })
+function restore() {
+  chrome.storage.sync.get('key', function (obj) {
+  });
 }
+
+document.addEventListener("DOMContentLoaded", restore);
+

@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <title>Image Replacer</title>
     <script src="../js/jquery.js"></script>
     <script src="../js/option.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -11,29 +13,38 @@
 <div class="container">
     <h3 class="title">Magic Image Switcher</h3>
 
-    <div id="prompt" class="show">
-        <p>Please select a URL for your picture files</p>
+    <div class="enable-wrapper">
+        <input id="enabled" type="checkbox">
+        <label for="enabled">Enabled</label>
     </div>
+
+    <div id="prompt" class="show">
+        <p>Please select a URL for each picture file.</p>
+        <p>You may select any image file you find on the web.</p>
+        <p>Please be mindful of copyright and licensing requirements.</p>
+    </div>
+
     <form action="" id="url-content">
-        <div class="image-wrapper">
-            <img class="img-0" src="https://www.codebymick.com/chrome/imagebank/logoRED.png">
-            <input id="img-0" class="url-item" value="https://www.codebymick.com/chrome/imagebank/logoNEG.png"/>
+        <div class="input-wrapper">
+            <div class="image-wrapper">
+                <img class="img-0" src="https://www.codebymick.com/chrome/imagebank/logoRED.png" alt="">
+            </div>
+            <div class="source-wrapper">
+                <input id="img-0" class="url-item" value="https://www.codebymick.com/chrome/imagebank/logoRED.png"/>
+                <div class="reset-wrapper">
+                    <button class="reset"></button>
+                    <label>Reset</label>
+                </div>
+                <button id="zero">del</button>
+                <div class="errorImage">the destination you have entered is not a valid image file.</div>
+            </div>
         </div>
     </form>
-    <button class="btn btn-default  add">add row</button>
-    <button class="btn btn-default  submit">submit</button>
+    <button class="btn btn-default add">add row</button>
+    <button id="submit" class="btn btn-default submit">Save</button>
+    <div class="saveError">please correct or remove invalid url</div>
     <div id="element"></div>
 
-    <div class="alert alert-info check-status" id="check_status" role="alert"></div>
-
-    <div class="alert alert-info random-image" id="random_image">
-        <img>
-    </div>
-
-    <div class="btn-group change-status pull-right" role="group" id="change_status">
-        <button type="button" class="btn btn-default btn-success" data-power="true">on</button>
-        <button type="button" class="btn btn-default off-btn" data-power="false">off</button>
-    </div>
 </div>
 
 </body>
