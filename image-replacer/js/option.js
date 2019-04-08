@@ -66,7 +66,7 @@ $(document).ready(function () {
     .append('<div class="input-wrapper"><div class="image-wrapper"><img class="img-' + inputCount + '" src="' + fallbackIMG + '"/>' +
       '</div><div class="source-wrapper">' +
       '<input class="url-item" id="img-' + inputCount + '" value="' + fallbackIMG + '" "  />' +
-      '<button id="zero">del</button>' +
+      '<button id="zero" class="btn btn-warning">delete row</button>' +
       '<div class="errorImage">the url you entered is not a valid image file.</div>' +
       '</div></div>');
     inputCount++;
