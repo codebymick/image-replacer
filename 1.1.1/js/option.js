@@ -31,11 +31,11 @@ $(document).on('click', '#zero', function (e) {
 });
 
 $(document).on('click', '#enabled', function () {
-  console.log(document.getElementById('enabled').checked);
+  status();
 });
 
 $(document).ready(function () {
-  document.getElementById('enabled').checked = true;
+  document.getElementById('enabled').checked = false;
 
 
 
@@ -75,13 +75,22 @@ $(document).ready(function () {
 });
 function save(urlArr) {
   let imageBank = urlArr;
-  chrome.storage.sync.set({key: imageBank});
+  chrome.storage.sync.set({
+    key: imageBank});
   $('#submit').text('Saved');
   restore();
 }
+function status(){
+  chrome.storage.sync.set({
+    enabled: document.getElementById("enabled").checked});
+}
 
 function restore() {
-  chrome.storage.sync.get('key', function (obj) {
+  chrome.storage.sync.get(null, function (items) {
+    // var allKeys = Object.keys(items);
+    // console.log(allKeys);
+    let randomImages = items.key;
+    // console.log(randomImages);
   });
 }
 

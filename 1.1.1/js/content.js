@@ -1,10 +1,12 @@
 "use strict";
 
-var randomImages = "";
 
-chrome.storage.sync.get('key', function (obj) {
-    let randomImages = obj.key;
-    replace(randomImages);
+chrome.storage.sync.get(null, function (items) {
+    let randomImages = items.key;
+    if (items.enabled === true) {
+        replace(randomImages);
+    }
+    console.log(items)
 });
 
 function replace(randomImages) {

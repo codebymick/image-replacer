@@ -1,7 +1,4 @@
 {
-   "background": {
-      "page": "views/background.html"
-   },
    "content_scripts": [ {
       "js": [ "js/jquery.js", "js/content.js" ],
       "matches": [ "<all_urls>" ],
