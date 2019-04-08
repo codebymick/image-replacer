@@ -4,7 +4,7 @@
       "matches": [ "<all_urls>" ],
       "run_at": "document_end"
    } ],
-   "description": "Put your custom images everywhere! Replaces all images on all pages to image of your choice.",
+   "description": "Put custom images everywhere! Replaces all images on most webpages with images of your choosing.",
    "homepage_url": "https://codebymick.com",
    "icons": {
       "128": "icons/128x128.png",

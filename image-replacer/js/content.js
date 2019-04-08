@@ -1,12 +1,14 @@
+/**
+ * Author: codebymick
+ * Date: 25.02.19
+ */
 "use strict";
-
 
 chrome.storage.sync.get(null, function (items) {
     let randomImages = items.key;
     if (items.enabled === true) {
         replace(randomImages);
     }
-    console.log(items)
 });
 
 function replace(randomImages) {

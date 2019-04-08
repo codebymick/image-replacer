@@ -1,12 +1,12 @@
 /**
- * Author: m.white
+ * Author: codebymick
  * Date: 25.01.19
  */
 
 $(document).on('keyup', '.url-item', function () {
 
   let source = $(this).val(), thisClass = $(this).attr("id"),
-      fallback                          = "https://codebymick.com/chrome/imagebank/logo.png",
+      fallback                          = "https://imagebank.codebymick.com/image-swap/logo.png",
       thisError                         = $(this).siblings('.errorImage');
   if (source) {
     let image     = new Image();
@@ -60,7 +60,7 @@ $(document).ready(function () {
     }
   });
 
-  let inputCount = 1, fallbackIMG = "https://codebymick.com/chrome/imagebank/logo.png";
+  let inputCount = 1, fallbackIMG = "https://imagebank.codebymick.com/image-swap/logo.png";
   $('.add').click(function () {
     $('#url-content')
     .append('<div class="input-wrapper"><div class="image-wrapper"><img class="img-' + inputCount + '" src="' + fallbackIMG + '"/>' +
@@ -87,10 +87,7 @@ function status(){
 
 function restore() {
   chrome.storage.sync.get(null, function (items) {
-    // var allKeys = Object.keys(items);
-    // console.log(allKeys);
-    let randomImages = items.key;
-    // console.log(randomImages);
+
   });
 }
 
