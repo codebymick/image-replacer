@@ -1,69 +1,21 @@
- /**
- * Created by PhpStorm.
- * Author: m.white
- * Date: 25.01.19
- */
+"use strict";
 
-let pr = {};
-pr.debug = false;
-pr.setting = {
-    class_name: 'pr-image-replace',
-    variation: 4
-}
-pr.image = {
-    change: function () {
-        pr.debug && console.log('image.change');
 
-        chrome.runtime.sendMessage({action: "pr_get_data"}, function (data) {
-            if (data.length) {
-                $('img:not([src *= "codebymick.com"])')/*$("img:not('." + pr.setting.class_name + "')")*/.each(function () {
-                    if ($(this).width() / $(this).height() < pr.setting.variation && $(this).height() / $(this).width() < pr.setting.variation) {
-                        $(this).css({width: $(this).width(), height: $(this).height()})
-                            .data('pr-url-origin', this.src)
-                            .attr('src', data[Math.floor(Math.random() * data.length)])/*
-                            .addClass(pr.setting.class_name)*/;
-                    }
-                })
-            }
-        });
-        setTimeout(function () {
-            pr.image.change();
-        }, 2000);
-    },
-    retrieve: function () {
-        pr.debug && console.log('image.retrieve');
-
-        $('img[src *= "codebymick.com"]')/*$('img.' + pr.setting.class_name)*/.each(function () {
-            $(this).attr('src', $(this).data('pr-url-origin'))/*.removeClass(pr.setting.class_name)*/;
-        });
+chrome.storage.sync.get(null, function (items) {
+    let randomImages = items.key;
+    if (items.enabled === true) {
+        replace(randomImages);
     }
-}
-
-chrome.runtime.onMessage.addListener(function (msg, sender, cb) {
-    pr.debug && console.log('chrome.runtime message', arguments);
-    if (msg.action == 'pr_change_power') {
-        if (msg.power) {
-            pr.image.change();
-        } else {
-            pr.image.retrieve();
-        }
-    }
-    if (msg.action == 'pr_check_data') {
-        if (msg.status == 'start') {
-            pr.image.retrieve();
-        } else if (msg.status == 'finish') {
-            pr.image.change();
-        } else if (msg.status == 'load') {
-            pr.image.retrieve();
-        }
-    }
+    console.log(items)
 });
 
-chrome.runtime.sendMessage({action: "pr_get_power"}, function (power) {
-    pr.debug && console.log('chrome.runtime pr_get_power', power);
-    if (power) {
-        pr.image.change();
-    } else {
-        pr.image.retrieve();
+function replace(randomImages) {
+    var imagesOld = document.getElementsByTagName("img");
+
+    for (var i = 0; i < imagesOld.length; i++) {
+        imagesOld[i].src = randomImages[rand(0, randomImages.length-1)];
     }
-});
+}
+function rand(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
