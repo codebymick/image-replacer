@@ -67,7 +67,7 @@ typings/
 
 #images
 img
-images
+!images
 *.jpg
 !*.png
 *.svg
