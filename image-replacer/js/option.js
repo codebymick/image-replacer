@@ -32,6 +32,7 @@ $(document).on('keyup', '.url-item', function () {
 
 $(document).on('click', '#zero', function (e) {
   e.preventDefault();
+  $('.saveError').removeClass('visible');
   $(this).closest('.input-wrapper').remove();
 });
 
@@ -66,12 +67,12 @@ $(document).ready(function () {
   });
 
   $(document).on('click', ['.add', '#zero'], function () {
-
     if($('form').children().length < 2){
       $('#zero').hide();
     } else {
       $('#zero').show();
-    }  });
+    }
+  });
 
     let inputCount = 1, fallbackIMG = "https://imagebank.codebymick.com/image-swap/logo.png";
 
