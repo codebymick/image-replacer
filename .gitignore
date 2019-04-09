@@ -69,7 +69,7 @@ typings/
 img
 images
 *.jpg
-*.png
+!*.png
 *.svg
 *.jpeg
 *.bmp
