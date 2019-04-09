@@ -1,7 +1,4 @@
-/**
- * Author: codebymick
- * Date: 25.02.19
- */
+/*** Author: codebymick - 25.02.19 */
 "use strict";
 
 chrome.storage.sync.get(null, function (items) {
