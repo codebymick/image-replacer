@@ -13,41 +13,45 @@
 <div class="container">
     <h3 class="title">Magic Image Switcher</h3>
     <div class="enable-wrapper">
-        <input id="enabled" type="checkbox">
-        <label for="enabled">Enabled</label>
+        <label for="enabled"><input id="enabled" type="checkbox"> Enabled</label>
     </div>
 
     <div id="prompt" class="show">
-        <p>Please select a URL for each picture file.</p>
-        <p>You may select any image file you find on the web.</p>
-        <p>Please be mindful of copyright and licensing requirements.</p>
+        <p>Please enter valid URL for an IMAGE file.</p>
+    </div>
+    <div class="ui-wrapper">
+        <div class="reset-wrapper">
+            <label><button class="reset"></button> Reset</label>
+        </div>
+        <button class="btn btn-default add">add row</button>
+        <button id="submit" class="btn btn-default submit">Save</button>
+        <div class="saveError">please correct or remove invalid url</div>
+        <div id="element"></div>
+        <form action="" id="url-content">
+            <div class="input-wrapper">
+                <div class="image-wrapper">
+                    <div class="img-0">
+                        <div class="fallback-text">Fallback Image</div>
+                    </div>
+                </div>
+                <div class="source-wrapper">
+                    <input id="img-0" class="url-item" value="https://imagebank.codebymick.com/image-swap/logo.png"/>
+                    <button id="zero" class="btn btn-warning">delete row</button>
+                    <div class="errorImage">Invalid image file!</div>
+                </div>
+            </div>
+        </form>
+
     </div>
 
-    <form action="" id="url-content">
-        <div class="input-wrapper">
-            <div class="image-wrapper">
-                <img class="img-0" src="https://imagebank.codebymick.com/image-swap/logoRED.png" alt="">
-            </div>
-            <div class="source-wrapper">
-                <input id="img-0" class="url-item" value="https://imagebank.codebymick.com/image-swap/logoRED.png"/>
-                <div class="reset-wrapper">
-                    <button class="reset"></button>
-                    <label>Reset</label>
-                </div>
-                <button id="zero">del</button>
-                <div class="errorImage">the destination you have entered is not a valid image file.</div>
-            </div>
+    <footer>
+        <span>Please respect copyright and licensing requirements.</span>
+        <div class="link-wrapper">
+            <a href="" class="btn btn-default share"></a>
+            <a href="" class="btn btn-default review"></a>
+            <a href="https://codebymick.com" target="_blank" class="btn btn-default brand"></a>
         </div>
-    </form>
-    <button class="btn btn-default add">add row</button>
-    <button id="submit" class="btn btn-default submit">Save</button>
-    <div class="saveError">please correct or remove invalid url</div>
-    <div id="element"></div>
-<footer>
-    <a href="" class="btn btn-default share"></a>
-    <a href="" class="btn btn-default review"></a>
-    <a href="https://codebymick.com" target="_blank"><img src="https://imagebank.codebymick.com/image-swap/logoGRN.png" alt="logo" class="brand"></a>
-</footer>
+    </footer>
 </div>
 
 </body>

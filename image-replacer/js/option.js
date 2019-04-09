@@ -11,13 +11,18 @@ $(document).on('keyup', '.url-item', function () {
   if (source) {
     let image     = new Image();
     image.onload  = function () {
-      $('.' + thisClass).attr("src", source).removeClass('invalid');
-      thisError.removeClass('show');
-      $('.saveError').removeClass('show');
+      $('.' + thisClass).css('background-image', 'url(' + source + ')').removeClass('invalid');
+      thisError.removeClass('visible');
+      $('.saveError').removeClass('visible');
+      $('.' + thisClass + ' .fallback-text').removeClass('visible');
+      $('.submit').removeClass('inactive');
+
     };
     image.onerror = function () {
-      $('.' + thisClass).attr("src", fallback).addClass('invalid');
-      thisError.addClass('show');
+      $('.' + thisClass).css('background-image', 'url(' + fallback + ')').addClass('invalid');
+      thisError.addClass('visible');
+      $('.' + thisClass + ' .fallback-text').addClass('visible');
+      $('.submit').addClass('inactive');
     };
     image.src     = source;
   }
@@ -36,12 +41,8 @@ $(document).on('click', '#enabled', function () {
 
 $(document).ready(function () {
   document.getElementById('enabled').checked = false;
+  $('#zero').hide();
 
-
-
-  if ($('form').find('.input-wrapper').length === 1) {
-    $('#zero').hide();
-  }
 
   $.fn.valuesArr = function () {
     let a = [];
@@ -56,38 +57,61 @@ $(document).ready(function () {
       let urlArr = $('.url-item').valuesArr();
       save(urlArr);
     } else {
-      $('.saveError').addClass('show');
+      $('.saveError').addClass('visible');
     }
   });
 
-  let inputCount = 1, fallbackIMG = "https://imagebank.codebymick.com/image-swap/logo.png";
+  $('.reset').click(function(){
+    chrome.tabs.reload();
+  });
+
+  $(document).on('click', ['.add', '#zero'], function () {
+
+    if($('form').children().length < 2){
+      $('#zero').hide();
+    } else {
+      $('#zero').show();
+    }  });
+
+    let inputCount = 1, fallbackIMG = "https://imagebank.codebymick.com/image-swap/logo.png";
+
+
   $('.add').click(function () {
     $('#url-content')
-    .append('<div class="input-wrapper"><div class="image-wrapper"><img class="img-' + inputCount + '" src="' + fallbackIMG + '"/>' +
-      '</div><div class="source-wrapper">' +
+    .append('<div class="input-wrapper"><div class="image-wrapper"><div class="img-' + inputCount + '">' +
+      '<div class="fallback-text">Fallback Image</div></div></div><div class="source-wrapper">' +
       '<input class="url-item" id="img-' + inputCount + '" value="' + fallbackIMG + '" "  />' +
       '<button id="zero" class="btn btn-warning">delete row</button>' +
-      '<div class="errorImage">the url you entered is not a valid image file.</div>' +
+      '<div class="errorImage">Invalid image file.</div>' +
       '</div></div>');
+    $('.image-wrapper .img-' + inputCount).css('background-image', 'url(' + fallbackIMG + ')');
     inputCount++;
   });
 
 });
+
 function save(urlArr) {
   let imageBank = urlArr;
   chrome.storage.sync.set({
-    key: imageBank});
+    key: imageBank
+  });
   $('#submit').text('Saved');
   restore();
 }
-function status(){
+
+function status() {
   chrome.storage.sync.set({
-    enabled: document.getElementById("enabled").checked});
+    enabled: document.getElementById("enabled").checked
+  });
+  if (!document.getElementById("enabled").checked) {
+    $('.ui-wrapper').removeClass('active');
+  } else {
+    $('.ui-wrapper').addClass('active');
+  }
 }
 
 function restore() {
   chrome.storage.sync.get(null, function (items) {
-
   });
 }
 
