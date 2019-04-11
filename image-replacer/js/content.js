@@ -9,9 +9,8 @@ chrome.storage.sync.get(null, function (items) {
 });
 
 function replace(randomImages) {
-    var imagesOld = document.getElementsByTagName("img");
-
-    for (var i = 0; i < imagesOld.length; i++) {
+    let imagesOld = document.getElementsByTagName("img");
+    for (let i = 0; i < imagesOld.length; i++) {
         imagesOld[i].src = randomImages[rand(0, randomImages.length-1)];
     }
 }
